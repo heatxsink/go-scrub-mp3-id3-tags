@@ -8,6 +8,12 @@ import (
 	id3 "github.com/mikkyang/id3-go"
 )
 
+var (
+	// setting 'set_flag' to true will allow writes to your mp3 tags please 
+	// understand the precautions of this before enabling
+	set_flag = false
+)
+
 func search_for_key_slash_pattern(title string) string {
 	return_value := ""
 	for j := 12; j >= 1; j-- {
@@ -59,7 +65,6 @@ func search_for_key_pattern(title string) string {
 }
 
 func read_tags(filename string) {
-	set_flag := false
 	mp3_file, err := id3.Open(filename)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Could not open %s: %s\n", filename, err)
